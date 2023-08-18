@@ -6,7 +6,7 @@
 >
 > ➠ [Технологический стек API](#технологический-стек-api)
 > 
-> ➠ [Удаленный запуск тестов в Jenkins](#-запуск-тестов-в-jenkins)
+> ➠ [Удаленный запуск тестов в Jenkins](#-удаленный-запуск-тестов-в-jenkins)
 >
 > ➠ [Отчет о результатах тестирования в Allure Report](#-главная-страница-allure-отчета)
 >
@@ -58,7 +58,7 @@
 > После завершения прогона отправляются уведомления с помощью бота в <code>Telegram</code>.
 
 
-## <img width="4%" title="Jenkins" src="readme_interactive_elements/logo/Jenkins.svg"> Запуск тестов в Jenkins
+## <img width="4%" title="Jenkins" src="readme_interactive_elements/logo/Jenkins.svg"> Удаленный запуск тестов в Jenkins
 
 Ссылка на Jenkins Job: <code>https://jenkins.autotests.cloud/job/19-marg0shek-final_project_api/</code>
 
