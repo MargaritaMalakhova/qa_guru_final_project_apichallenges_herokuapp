@@ -5,6 +5,8 @@
 > ➠ [API сервис Apichallenges Herokuapp](#api-сервис-apichallenges-herokuapp)
 >
 > ➠ [Технологический стек API](#технологический-стек-api)
+> 
+> ➠ [Запуск тестов в Jenkins](#-удаленный-запуск-тестов-в-Jenkins)
 >
 > ➠ [Отчет о результатах тестирования в Allure Report](#-главная-страница-allure-отчета)
 >
@@ -38,6 +40,11 @@
 <img width="6%" title="Jenkins" src="readme_interactive_elements/logo/Jenkins.svg">
 <img width="6%" title="Telegram" src="readme_interactive_elements/logo/Telegram.svg">
 </p>
+
+
+## <img width="4%" title="Jenkins" src="readme_design/logo/Jenkins.svg"> Удаленный запуск тестов в Jenkins
+
+> Ссылка на Jenkins Job: <code>https://jenkins.autotests.cloud/job/19-marg0shek-final_project_api/</code>
 
 ### В данном подпроекте автотесты написаны на <code>Java</code> с использованием <code>Rest Assured</code> для Api-тестов.
 >
