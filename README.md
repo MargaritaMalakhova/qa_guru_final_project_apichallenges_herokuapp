@@ -6,7 +6,7 @@
 >
 > ➠ [Технологический стек API](#технологический-стек-api)
 > 
-> ➠ [Запуск тестов в Jenkins](#-удаленный-запуск-тестов-в-Jenkins)
+> ➠ [Удаленный запуск тестов в Jenkins](#удаленный-запуск-тестов-в-Jenkins)
 >
 > ➠ [Отчет о результатах тестирования в Allure Report](#-главная-страница-allure-отчета)
 >
@@ -42,9 +42,6 @@
 </p>
 
 
-##№ <img width="4%" title="Jenkins" src="readme_interactive_elements/logo/Jenkins.svg"> Удаленный запуск тестов в Jenkins
-
-> Ссылка на Jenkins Job: <code>https://jenkins.autotests.cloud/job/19-marg0shek-final_project_api/</code>
 
 ### В данном подпроекте автотесты написаны на <code>Java</code> с использованием <code>Rest Assured</code> для Api-тестов.
 >
@@ -59,6 +56,11 @@
 > <code>Jenkins</code> выполняет запуск тестов.
 >
 > После завершения прогона отправляются уведомления с помощью бота в <code>Telegram</code>.
+
+
+## <img width="4%" title="Jenkins" src="readme_interactive_elements/logo/Jenkins.svg"> Удаленный запуск тестов в Jenkins
+
+> Ссылка на Jenkins Job: <code>https://jenkins.autotests.cloud/job/19-marg0shek-final_project_api/</code>
 
 ## <img width="4%" title="Allure_Report" src="readme_interactive_elements/logo/Allure_Report.svg"> Главная страница allure отчета
 
