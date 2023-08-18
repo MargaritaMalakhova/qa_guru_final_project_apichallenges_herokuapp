@@ -60,7 +60,7 @@
 
 ## <img width="4%" title="Jenkins" src="readme_interactive_elements/logo/Jenkins.svg"> 1234
 
-> Ссылка на Jenkins Job: <code>https://jenkins.autotests.cloud/job/19-marg0shek-final_project_api/</code>
+Ссылка на Jenkins Job: <code>https://jenkins.autotests.cloud/job/19-marg0shek-final_project_api/</code>
 
 ## <img width="4%" title="Allure_Report" src="readme_interactive_elements/logo/Allure_Report.svg"> Главная страница allure отчета
 
