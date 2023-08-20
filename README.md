@@ -6,6 +6,8 @@
 >
 > ➠ [Технологический стек API](#технологический-стек-api)
 > 
+> ➠ [Запуск тестов из терминала](#запуск-тестов-из-терминала)
+>
 > ➠ [Удаленный запуск тестов в Jenkins](#-удаленный-запуск-тестов-в-jenkins)
 >
 > ➠ [Отчет о результатах тестирования в Allure Report](#-главная-страница-allure-отчета)
@@ -57,10 +59,17 @@
 >
 > После завершения прогона отправляются уведомления с помощью бота в <code>Telegram</code>.
 
+### Запуск тестов из терминала
+
+### Для локального запуска тестов необходимо выполнить команду:
+
+```
+gradle clean test
+```
 
 ## <img width="4%" title="Jenkins" src="readme_interactive_elements/logo/Jenkins.svg"> Удаленный запуск тестов в Jenkins
 
-Ссылка на Jenkins Job: <code>https://jenkins.autotests.cloud/job/19-marg0shek-final_project_api/</code>
+> Для запуска тестов в Jenkins создана Jenkins Job: <code>https://jenkins.autotests.cloud/job/19-marg0shek-final_project_api/</code>
 
 ## <img width="4%" title="Allure_Report" src="readme_interactive_elements/logo/Allure_Report.svg"> Главная страница allure отчета
 
