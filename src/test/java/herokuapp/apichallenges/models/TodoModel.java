@@ -1,11 +1,11 @@
-package herokuapp.apichallenges.models.lombok;
+package herokuapp.apichallenges.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CreationTodoResponseModel {
+public class TodoModel {
     Integer id;
     String title;
     Boolean doneStatus;

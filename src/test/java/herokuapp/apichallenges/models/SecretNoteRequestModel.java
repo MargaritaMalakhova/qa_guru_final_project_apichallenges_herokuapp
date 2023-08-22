@@ -1,11 +1,10 @@
-package herokuapp.apichallenges.models.lombok;
+package herokuapp.apichallenges.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ChangingTodoRequestModel {
-    String title;
-    Boolean doneStatus;
+public class SecretNoteRequestModel {
+    String note;
 }

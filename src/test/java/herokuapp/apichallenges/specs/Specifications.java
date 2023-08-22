@@ -4,6 +4,8 @@ import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 
+import static herokuapp.apichallenges.auth.Authorization.*;
+import static herokuapp.apichallenges.auth.Authorization.XAuthTokenHeaderValue;
 import static herokuapp.apichallenges.helpers.CustomAllureListener.withCustomTemplates;
 import static io.restassured.RestAssured.with;
 import static io.restassured.filter.log.LogDetail.*;
@@ -12,6 +14,13 @@ import static org.hamcrest.Matchers.notNullValue;
 
 public class Specifications {
     public static RequestSpecification requestSpec = with()
+            .header(tokenXChallengerHeader, tokenXChallengerHeaderValue)
+            .log().all()
+            .filter(withCustomTemplates())
+            .contentType(JSON);
+
+    public static RequestSpecification requestSpecSecret = with()
+            .headers(tokenXChallengerHeader, tokenXChallengerHeaderValue, XAuthTokenHeader, XAuthTokenHeaderValue)
             .log().all()
             .filter(withCustomTemplates())
             .contentType(JSON);
@@ -43,5 +52,10 @@ public class Specifications {
     public static ResponseSpecification response403Spec = new ResponseSpecBuilder()
             .log(ALL)
             .expectStatusCode(403)
+            .build();
+
+    public static ResponseSpecification response404Spec = new ResponseSpecBuilder()
+            .log(ALL)
+            .expectStatusCode(404)
             .build();
 }

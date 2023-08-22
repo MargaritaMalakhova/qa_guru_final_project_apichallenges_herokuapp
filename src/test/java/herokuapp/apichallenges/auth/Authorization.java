@@ -13,14 +13,10 @@ public class Authorization {
     public static String getXChal() {
 
         Response response = given()
-                .log().uri()
-                .log().headers()
                 .header("ContentType","application/json")
                 .when()
                 .post("/challenger")
                 .then()
-                .log().status()
-                .log().headers()
                 .statusCode(201)
                 .extract()
                 .response();
@@ -32,15 +28,11 @@ public class Authorization {
     public static String getXCAuth() {
         Response response = given()
 
-                .log().uri()
-                .log().headers()
                 .headers(tokenXChallengerHeader,tokenXChallengerHeaderValue,
                         "Authorization", "Basic YWRtaW46cGFzc3dvcmQ=")
                 .when()
                 .post("/secret/token")
                 .then()
-                .log().status()
-                .log().headers()
                 .statusCode(201)
                 .extract()
                 .response();

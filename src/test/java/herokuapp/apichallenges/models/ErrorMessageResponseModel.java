@@ -1,10 +1,10 @@
-package herokuapp.apichallenges.models.lombok;
+package herokuapp.apichallenges.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SecretNoteResponseModel {
-    String note;
+public class ErrorMessageResponseModel {
+    String[] errorMessages;
 }
