@@ -13,7 +13,7 @@ import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@DisplayName("Create Secret Note Tests")
+@DisplayName("Secret Note Tests")
 public class SecretNoteTests extends TestBase {
     public static String changedNote = "secret note is changed";
     public static String newSecretNote = "create new secret note";

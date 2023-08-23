@@ -1,5 +1,6 @@
 package herokuapp.apichallenges.tests;
 
+import herokuapp.apichallenges.helpers.CreationTodo;
 import herokuapp.apichallenges.models.*;
 import io.qameta.allure.Owner;
 import org.junit.jupiter.api.DisplayName;
@@ -15,16 +16,17 @@ public class TodosTests extends TestBase {
     public static String changedTodoTitle = "changed title";
     public static String newTodoTitle = "create new todo";
     public static String newTodoDescription = "create it now";
-    Integer id;
+    CreationTodo creationTodo = new CreationTodo();
 
     @Test
     @DisplayName("Create Todo Positive Test")
     @Owner("m.malakhova")
-    public Integer createTodoPositiveTest() {
+    public void createTodoPositiveTest() {
         CreationTodoRequestModel creationTodoRequestBody = new CreationTodoRequestModel();
         creationTodoRequestBody.setTitle(newTodoTitle);
         creationTodoRequestBody.setDoneStatus(false);
         creationTodoRequestBody.setDescription(newTodoDescription);
+        Integer id;
 
         CreationTodoResponseModel postResponse = step("Create Todo", () ->
                 given()
@@ -46,20 +48,19 @@ public class TodosTests extends TestBase {
 
         CheckingTodosResponse getResponse = step("Get Todo by id", () ->
                 given()
-                .spec(requestSpec)
-                .formParam("doneStatus", false)
-                .when()
-                .get("/todos/" + id)
-                .then()
-                .spec(response200Spec)
-                .extract().as(CheckingTodosResponse.class));
+                        .spec(requestSpec)
+                        .formParam("doneStatus", false)
+                        .when()
+                        .get("/todos/" + id)
+                        .then()
+                        .spec(response200Spec)
+                        .extract().as(CheckingTodosResponse.class));
         step("Check Todo in response", () ->
         {
             assertEquals(newTodoTitle, getResponse.getTodos().getFirst().getTitle());
             assertEquals(false, getResponse.getTodos().getFirst().getDoneStatus());
             assertEquals(newTodoDescription, getResponse.getTodos().getFirst().getDescription());
         });
-        return id;
     }
 
     @Test
@@ -85,105 +86,102 @@ public class TodosTests extends TestBase {
                 assertEquals("Failed Validation: doneStatus should be BOOLEAN", response.getErrorMessages()[0]));
     }
 
-        @Test
-        @DisplayName("Change Todo Positive Test")
-        @Owner("m.malakhova")
-        public void changeTodoTitlePositiveTest() {
+    @Test
+    @DisplayName("Change Todo Positive Test")
+    @Owner("m.malakhova")
+    public void changeTodoTitlePositiveTest() {
+        Integer id = creationTodo.createTodoForTest();
+        ChangingTodoRequestModel updatingTodoRequestModel = new ChangingTodoRequestModel();
+        updatingTodoRequestModel.setTitle(changedTodoTitle);
+        updatingTodoRequestModel.setDoneStatus(false);
 
-            Integer id = createTodoPositiveTest();
-            ChangingTodoRequestModel updatingTodoRequestModel = new ChangingTodoRequestModel();
-            updatingTodoRequestModel.setTitle(changedTodoTitle);
-            updatingTodoRequestModel.setDoneStatus(false);
+        CreationTodoResponseModel response = step("Change Todo's title", () ->
+                given()
+                        .spec(requestSpec)
+                        .body(updatingTodoRequestModel)
+                        .when()
+                        .post("/todos/" + id)
+                        .then()
+                        .spec(response200Spec)
+                        .extract().as(CreationTodoResponseModel.class));
 
-            CreationTodoResponseModel response = step("Change Todo's title", () ->
-                    given()
-                            .spec(requestSpec)
-                            .body(updatingTodoRequestModel)
-                            .when()
-                            .post("/todos/" + id)
-                            .then()
-                            .spec(response200Spec)
-                            .extract().as(CreationTodoResponseModel.class));
+        step("Check Todos's title in response", () ->
+                assertEquals(changedTodoTitle, response.getTitle()));
 
-            step("Check Todos's title in response", () ->
-                    assertEquals(changedTodoTitle, response.getTitle()));
+        CheckingTodosResponse getResponse = step("Get Todo by id", () ->
+                given()
+                        .spec(requestSpec)
+                        .formParam("doneStatus", false)
+                        .when()
+                        .get("/todos/" + id)
+                        .then()
+                        .spec(response200Spec)
+                        .extract().as(CheckingTodosResponse.class));
+        step("Check Todo's title in system", () ->
+                    assertEquals(changedTodoTitle, getResponse.getTodos().getFirst().getTitle()));
+    }
 
-            CheckingTodosResponse getResponse = step("Get Todo by id", () ->
-                    given()
-                            .spec(requestSpec)
-                            .formParam("doneStatus", false)
-                            .when()
-                            .get("/todos/" + id)
-                            .then()
-                            .spec(response200Spec)
-                            .extract().as(CheckingTodosResponse.class));
-            step("Check Todo's title in system", () ->
-            {
-                assertEquals(changedTodoTitle, getResponse.getTodos().getFirst().getTitle());
-            });
-        }
+    @Test
+    @DisplayName("Update Todo Status Positive Test")
+    @Owner("m.malakhova")
+    public void changeTodoStatusPositiveTest() {
+        Integer id = creationTodo.createTodoForTest();
+        ChangingTodoRequestModel updatingTodoRequestModel = new ChangingTodoRequestModel();
+        updatingTodoRequestModel.setDoneStatus(true);
 
-        @Test
-        @DisplayName("Update Todo Status Positive Test")
-        @Owner("m.malakhova")
-        public void changeTodoStatusPositiveTest() {
-            Integer id = createTodoPositiveTest();
-            ChangingTodoRequestModel updatingTodoRequestModel = new ChangingTodoRequestModel();
-            updatingTodoRequestModel.setDoneStatus(true);
+        CreationTodoResponseModel response = step("Change Todo's DoneStatus", () ->
+                given()
+                        .spec(requestSpec)
+                        .body(updatingTodoRequestModel)
+                        .when()
+                        .post("/todos/" + id)
+                        .then()
+                        .spec(response200Spec)
+                        .extract().as(CreationTodoResponseModel.class));
 
-            CreationTodoResponseModel response = step("Change Todo's DoneStatus", () ->
-                    given()
-                            .spec(requestSpec)
-                            .body(updatingTodoRequestModel)
-                            .when()
-                            .post("/todos/" + id)
-                            .then()
-                            .spec(response200Spec)
-                            .extract().as(CreationTodoResponseModel.class));
+        step("Check Todos's DoneStatus in response", () ->
+                assertEquals(true, response.getDoneStatus()));
 
-            step("Check Todos's DoneStatus in response", () ->
-                    assertEquals(true, response.getDoneStatus()));
+        CheckingTodosResponse getResponse = step("Get Todo by id", () ->
+                given()
+                        .spec(requestSpec)
+                        .formParam("doneStatus", true)
+                        .when()
+                        .get("/todos/" + id)
+                        .then()
+                        .spec(response200Spec)
+                        .extract().as(CheckingTodosResponse.class));
+        step("Check Todos's DoneStatus in system", () ->
+                assertEquals(true, getResponse.getTodos().getFirst().getDoneStatus()));
+    }
 
-            CheckingTodosResponse getResponse = step("Get Todo by id", () ->
-                    given()
-                            .spec(requestSpec)
-                            .formParam("doneStatus", true)
-                            .when()
-                            .get("/todos/" + id)
-                            .then()
-                            .spec(response200Spec)
-                            .extract().as(CheckingTodosResponse.class));
-            step("Check Todos's DoneStatus in system", () ->
-                  assertEquals(true, getResponse.getTodos().getFirst().getDoneStatus()));
-        }
+    @Test
+    @DisplayName("Change Todo Status Negative Test")
+    @Owner("m.malakhova")
+    public void changeTodoInvalidStatusTest() {
+        Integer id = creationTodo.createTodoForTest();
+        ChangingTodoRequestModel updatingTodoRequestModel = new ChangingTodoRequestModel();
+        updatingTodoRequestModel.setDoneStatus(null);
 
-        @Test
-        @DisplayName("Change Todo Status Negative Test")
-        @Owner("m.malakhova")
-        public void changeTodoInvalidStatusTest() {
-            Integer id = createTodoPositiveTest();
-            ChangingTodoRequestModel updatingTodoRequestModel = new ChangingTodoRequestModel();
-            updatingTodoRequestModel.setDoneStatus(null);
+        ErrorMessageResponseModel response = step("Change Todo's DoneStatus", () ->
+                given()
+                        .spec(requestSpec)
+                        .body(updatingTodoRequestModel)
+                        .when()
+                        .post("/todos/" + id)
+                        .then()
+                        .spec(response400Spec)
+                        .extract().as(ErrorMessageResponseModel.class));
 
-            ErrorMessageResponseModel response = step("Change Todo's DoneStatus", () ->
-                    given()
-                            .spec(requestSpec)
-                            .body(updatingTodoRequestModel)
-                            .when()
-                            .post("/todos/" + id)
-                            .then()
-                            .spec(response400Spec)
-                            .extract().as(ErrorMessageResponseModel.class));
-
-            step("Check error message in response", () ->
-                    assertEquals("Failed Validation: doneStatus should be BOOLEAN", response.getErrorMessages()[0]));
-        }
+        step("Check error message in response", () ->
+                assertEquals("Failed Validation: doneStatus should be BOOLEAN", response.getErrorMessages()[0]));
+    }
 
     @Test
     @DisplayName("Delete Todo Positive Test")
     @Owner("m.malakhova")
     public void deleteTodoPositiveTest() {
-        Integer id = createTodoPositiveTest();
+        Integer id = creationTodo.createTodoForTest();
         step("Delete Todo", () ->
                 given()
                         .spec(requestSpec)
@@ -192,10 +190,9 @@ public class TodosTests extends TestBase {
                         .then()
                         .spec(response200Spec));
 
-                step("Check deleted Todo in system", () ->
+        step("Check deleted Todo in system", () ->
                 given()
                         .spec(requestSpec)
-                        .formParam("doneStatus", true)
                         .when()
                         .get("/todos/" + id)
                         .then()
