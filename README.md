@@ -70,6 +70,9 @@ gradle clean test
 ## <img width="4%" title="Jenkins" src="readme_interactive_elements/logo/Jenkins.svg"> Удаленный запуск тестов в Jenkins
 
 > Для запуска тестов в Jenkins создана Jenkins Job: <code>https://jenkins.autotests.cloud/job/19-marg0shek-final_project_api/</code>
+<p align="center">
+<img title="Jenkins_Job" src="readme_interactive_elements/screens/JenkinsJob.png">
+</p>
 
 ## <img width="4%" title="Allure_Report" src="readme_interactive_elements/logo/Allure_Report.svg"> Главная страница allure отчета
 
